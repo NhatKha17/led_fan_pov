@@ -1,0 +1,122 @@
+@startuml
+== Check activiy UART ==
+PC -> STM32: PACKET_TYPE_CHECK
+alt sizeof(DATA) == TOTAL LENGTH
+STM32->STM32 : process data
+STM32 --> PC: OK
+else
+STM32 --> PC: !OK
+end
+
+== Set time by humane time ==
+PC -> STM32: PACKET_TYPE_SET_TIME
+alt sizeof(DATA) == TOTAL LENGTH
+STM32->STM32 :set_time() 
+alt set_time() == SUCCESS
+STM32->PC: SET TIME OK
+else
+STM32->PC: SET TIME !OK
+end
+STM32->PC: DATA FAILED
+end
+== Set time by epoch time ==
+PC -> STM32: PACKET_TYPE_SET_EPOCH_TIME
+alt sizeof(DATA) == TOTAL LENGTH
+STM32->STM32 :set_epoch_time()
+alt set_epoch_time() == SUCCESS
+STM32->PC: SET EPOCH TIME OK
+else
+STM32->PC: SET EPOCH TIME !OK
+end
+STM32->PC: DATA FAILED
+end
+== Set get time ==
+PC -> STM32: PACKET_TYPE_GET_TIME
+alt sizeof(DATA) == TOTAL LENGTH
+STM32->STM32 :get_time() 
+alt get_time() == SUCCESS
+STM32->PC: "//dayofweek, dd-mm-yyyy hr:min:sec//""
+else
+STM32->PC: GET TIME !OK
+end
+STM32->PC: DATA FAILED
+end
+== Set mode 12h/24h ==
+PC -> STM32: PACKET_TYPE_SET_MODE_12H(24H)
+alt sizeof(DATA) == TOTAL LENGTH
+STM32->STM32 :set_mode_time()
+alt set_mode_time() == SUCCESS
+STM32->PC: SET MODE 12H(24H) OK
+else
+STM32->PC: SET MODE 12H(24H) !OK
+end
+STM32->PC: DATA FAILED
+end
+== Set alarm 1(2) ==
+PC -> STM32: PACKET_TYPE_SET_ALARM_1(2)
+alt sizeof(DATA) == TOTAL LENGTH
+STM32->STM32 :set_alarm()
+alt set_alarm() == SUCCESS
+STM32->PC: SET ALARM 1(2) OK
+else
+STM32->PC: SET ALARM 1(2) !OK
+end
+STM32->PC: DATA FAILED
+end
+== Cancle alarm 1(2) ==
+PC -> STM32: PACKET_TYPE_CANCLE_ALARM_1(2)
+alt sizeof(DATA) == TOTAL LENGTH
+STM32->STM32 :cancle_alarm()
+alt cancle_alarm() == SUCCESS
+STM32->PC: CANCLE ALARM 1(2) OK
+else
+STM32->PC: CANCLE ALARM 1(2) !OK
+end
+STM32->PC: DATA FAILED
+end
+== Modify alarm 1(2) ==
+PC -> STM32: PACKET_TYPE_MODIFY_ALARM_1(2)
+alt sizeof(DATA) == TOTAL LENGTH
+STM32->STM32 :modify_alarm()
+alt modify_alarm() == SUCCESS
+STM32->PC: MODIFY ALARM 1(2) OK
+else
+STM32->PC: MODIFY ALARM 1(2) !OK
+end
+STM32->PC: DATA FAILED
+end
+== Set brigthness ==
+PC -> STM32: PACKET_TYPE_SET_BRIGTHNESS
+alt sizeof(DATA) == TOTAL LENGTH
+STM32->STM32 :set_brigthness()
+alt set_brigthness() == SUCCESS
+STM32->PC: SET BRIGTHNESS OK
+else
+STM32->PC: SET BRIGTHNESS !OK
+end
+else 
+STM32->PC: DATA FAILED
+end
+== Set color 1(2)(3) ==
+PC -> STM32: PACKET_TYPE_SET_COLOR_1(2)(3)
+alt sizeof(DATA) == TOTAL LENGTH
+STM32->STM32 :set_color()
+alt set_color() == SUCCESS
+STM32->PC: SET COLOR OK
+else
+STM32->PC: SET COLOR !OK
+end
+STM32->PC: DATA FAILED
+end
+== Set temperature F(C) ==
+PC -> STM32: PACKET_TYPE_SET_TEMPERATURE_F(C)_DEGREE
+alt sizeof(DATA) == TOTAL LENGTH
+STM32->STM32 :set_temperature_f(c)()
+alt set_temperature_f(c)() == SUCCESS
+STM32->PC: SET TEMPERATURE F(C) OK
+else
+STM32->PC: SET TEMPERATURE F(C) !OK
+end
+STM32->PC: DATA FAILED
+end
+@enduml

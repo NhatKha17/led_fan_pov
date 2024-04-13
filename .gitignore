@@ -1,0 +1,8 @@
+#vscode
+.vscode/
+
+# STM32CubeIDE
+
+# Debug and Release folders
+final_project/Debug/
+Release/

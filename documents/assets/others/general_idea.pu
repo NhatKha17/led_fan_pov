@@ -1,0 +1,26 @@
+@startuml
+
+box Sensors #Green
+participant MAX30102_I2C
+participant CJMCU75_I2C
+participant MAX30102_I2C
+participant RCWL0516_GPIO
+participant BUTTON
+end box
+
+box Controller #LightBlue
+participant STM32F411RE
+end box
+
+box Other module #Yellow
+participant Bluetooth_module
+participant DS1307_I2C
+end box
+
+box Actuators #OrangeRed
+participant SSD1306_I2C
+participant BUZZER
+participant LED_RGB
+end box
+
+@enduml
